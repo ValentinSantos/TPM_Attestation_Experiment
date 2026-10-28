@@ -30,7 +30,7 @@ tpm2_load -C primary.ctx -u pcr_rsa.pub -r pcr_rsa.priv -c pcr_rsa.ctx
 echo "== 5. Test 1: Successful Signing (Matching State) =="
 tpm2_startauthsession --policy-session -S policy.ctx
 tpm2_policypcr -S policy.ctx -l sha256:16 -f pcr16.val
-tpm2_sign -c pcr_rsa.ctx -g sha256 -o pcr_signature.bin message.txt -p session:policy.ctx
+tpm2_sign -c pcr_rsa.ctx -g sha256 -f plain -o pcr_signature.bin message.txt -p session:policy.ctx
 tpm2_flushcontext policy.ctx
 echo "SUCCESS: Signed under valid PCR state!"
 
