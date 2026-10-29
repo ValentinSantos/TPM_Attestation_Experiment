@@ -59,6 +59,7 @@ sudo ./scripts/Task_1/TPM-B-RSA.sh
 ## 5. How to run the ECC experiment
 
 Same flow as RSA, only the key type is ECC instead of RSA.
+
 **On TPM-A:** create the ECC key in the TPM, sign `message.txt` and export the public key
 
 ```bash
@@ -85,14 +86,14 @@ The ECC signature and public key are much smaller then the RSA ones. This is exp
 
 ## 6. How to run the PCR-bound signing experiment
 
-**On TPM-A:** set the expected PCR 16 value, create the RSA key bound to it with a PCR policy and sing `message.txt`, then reset PCR 16 16 and try to sign again.
+**On TPM-A:** set the expected PCR 16 value, create the RSA key bound to it with a PCR policy and sign `message.txt`, then reset PCR 16 16 and try to sign again.
 
 ```bash
 sudo ./scripts/Task_3/TPM-A-PCR.sh
 scp message.txt pcr_signature.bin pcr_rsa-public.pem <user>@192.168.1.100:<TPM-B WORKDIR>/
 ```
 
-**On TMP-B:** verify the signature made under the valid PCR state. The signature is saved in a plain format, so `-f rsassa` is needed.
+**On TPM-B:** verify the signature made under the valid PCR state. The signature is saved in a plain format, so `-f rsassa` is needed.
 
 ```bash
 cd <TPM-B WORKDIR>
