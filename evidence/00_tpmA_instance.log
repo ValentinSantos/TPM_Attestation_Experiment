@@ -1,0 +1,22 @@
+Script started on 2026-10-29 17:34:53-05:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="77" LINES="28"]
+$ tpm2_flushcontext -t
+$ tpm2_getcap properties-fixed | grep -A2 FAMILY_INDICATOR
+TPM2_PT_FAMILY_INDICATOR:
+  raw: 0x322E3000
+  value: "2.0"
+--
+TPM2_PT_PS_FAMILY_INDICATOR:
+  raw: 0x1
+TPM2_PT_PS_LEVEL:
+$ ip -4 addr show
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    inet 10.0.2.15/24 brd 10.0.2.255 scope global dynamic noprefixroute eth0
+       valid_lft 83207sec preferred_lft 83207sec
+$ tpm2_createprimary -C o -G rsa -g sha256 -c id_primary.ctx > /dev/null
+$ tpm2_readpublic -c id_primary.ctx | grep '^name:'
+name: 000b9269893020beb493c469e919db80ab35453c2b07f20389cbcfff12f7ff26df04
+$ exit
+Script done on 2026-10-29 17:35:53-05:00 [COMMAND_EXIT_CODE="0"]
